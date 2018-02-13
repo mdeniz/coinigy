@@ -21,12 +21,12 @@ module Coinigy
 
     def data
       return nil if error?
-      @json[0]['data']
+      @json['data']
     end
 
     def notifications
       return nil if error?
-      @json[0]['notifications']
+      @json['notifications']
     end
 
     def to_json

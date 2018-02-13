@@ -19,9 +19,7 @@ module Coinigy
         'X-API-KEY': options[:key] || '',
         'X-API-SECRET': options[:secret] || ''
       }
-      #@root = 'https://private-anon-53a8e2b59c-coinigy.apiary-proxy.com/api/v1'
-      @root = options[:root] || 'https://private-anon-53a8e2b59c-coinigy.apiary-mock.com/api/v1'
-      # https://api.coinigy.com/api/v1
+      @root = options[:root] || 'https://api.coinigy.com/api/v1'
       @last_request_timestamp = Time.now
     end
 
