@@ -6,6 +6,7 @@ require 'coinigy/client/account_functions'
 require 'coinigy/client/market_data'
 
 module Coinigy
+  # Client to connect to the specified coinigy api
   class Client
 
     include Coinigy::Client::AccountData
@@ -14,12 +15,13 @@ module Coinigy
 
     def initialize(options = {})
       @headers = {
-        content_type: 'application/json',
-        x_api_key: options[:key] || '',
-        x_api_secret: options[:secret] || ''
+        'Content-Type': 'application/json',
+        'X-API-KEY': options[:key] || '',
+        'X-API-SECRET': options[:secret] || ''
       }
       #@root = 'https://private-anon-53a8e2b59c-coinigy.apiary-proxy.com/api/v1'
       @root = options[:root] || 'https://private-anon-53a8e2b59c-coinigy.apiary-mock.com/api/v1'
+      # https://api.coinigy.com/api/v1
       @last_request_timestamp = Time.now
     end
 
@@ -32,7 +34,7 @@ module Coinigy
     def request(path, payload = nil)
       wait_for_api_limit
       if payload
-        response = RestClient.post(url(path), payload, @headers.merge({ content_type: 'application/json,application/json' }))
+        response = RestClient.post(url(path), payload, @headers.merge({ 'Content-Type': 'application/json,application/json' }))
       else
         response = RestClient.post(url(path), @headers)
       end
