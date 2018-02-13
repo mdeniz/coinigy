@@ -16,6 +16,14 @@ module Coinigy
       def accounts
         request('accounts')
       end
+
+      def balances
+        request('balances')
+      end
+
+      def balance_history(date = Date.today.to_s)
+        request('balanceHistory', { date: date })
+      end
     end
   end
 end

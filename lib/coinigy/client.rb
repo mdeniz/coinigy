@@ -32,7 +32,7 @@ module Coinigy
     def request(path, payload = nil)
       wait_for_api_limit
       if payload
-        response = RestClient.post(url(path), payload, @headers)
+        response = RestClient.post(url(path), payload, @headers.merge({ content_type: 'application/json,application/json' }))
       else
         response = RestClient.post(url(path), @headers)
       end
