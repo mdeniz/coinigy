@@ -1,14 +1,16 @@
 require 'rest-client'
 require 'yajl'
 
-require 'coinigy/client/account'
-require 'coinigy/client/subscription'
+require 'coinigy/client/account_data'
+require 'coinigy/client/account_functions'
+require 'coinigy/client/market_data'
 
 module Coinigy
   class Client
 
-    include Coinigy::Client::Account
-    include Coinigy::Client::Subscription
+    include Coinigy::Client::AccountData
+    include Coinigy::Client::AccountFunctions
+    include Coinigy::Client::MarketData
 
     def initialize(options = {})
       @headers = {
