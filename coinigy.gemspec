@@ -1,0 +1,27 @@
+lib = 'coinigy'
+lib_file = File.expand_path("../lib/#{lib}.rb", __FILE__)
+File.read(lib_file) =~ /\bVERSION\s*=\s*["'](.+?)["']/
+version = $1
+
+Gem::Specification.new do |spec|
+  spec.name        = lib
+  spec.version     = version
+  spec.date        = '2018-02-13'
+
+  spec.summary     = "A client for the API of www.coinigy.com"
+  spec.description = "This client allows you to interact with your Coinigy Account and Exchange Accounts directly, to refresh balances, place and cancel orders, set and cancel alerts, and poll for market data."
+
+  spec.authors     = ["Moisés Déniz Alemán"]
+  spec.email       = 'mdeniz@suse.com'
+  spec.homepage    = 'https://github.com/mdeniz/coinigy'
+  spec.license     = 'MIT'
+
+  spec.add_dependency 'rest-client'
+  spec.add_dependency 'yajl-ruby'
+
+  spec.files = %w(Gemfile LICENSE README.md)
+  spec.files << "#{lib}.gemspec"
+  spec.files += Dir.glob("lib/**/*.rb")
+  #spec.files += Dir.glob("test/**/*.rb")
+  #spec.files += Dir.glob("script/*")
+end
