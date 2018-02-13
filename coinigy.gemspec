@@ -16,10 +16,10 @@ Gem::Specification.new do |spec|
   spec.homepage    = 'https://github.com/mdeniz/coinigy'
   spec.license     = 'MIT'
 
-  spec.add_dependency 'rest-client'
-  spec.add_dependency 'yajl-ruby'
+  spec.add_runtime_dependency 'rest-client', '~> 2.0'
+  spec.add_runtime_dependency 'yajl-ruby', '~> 1.3'
 
-  spec.files = %w(Gemfile LICENSE README.md)
+  spec.files = %w(LICENSE README.md)
   spec.files << "#{lib}.gemspec"
   spec.files += Dir.glob("lib/**/*.rb")
   #spec.files += Dir.glob("test/**/*.rb")
