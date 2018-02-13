@@ -35,3 +35,7 @@ The coinigy gem depends on these other gems for usage at runtime:
 
   * [yajl-ruby](https://github.com/brianmario/yajl-ruby)
   * [rest-client](https://github.com/rest-client/rest-client)
+
+## Reference
+
+See the [reference](https://mdeniz.github.io/coinigy/doc/) for more detailed information.
