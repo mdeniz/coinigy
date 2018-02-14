@@ -27,6 +27,22 @@ module Coinigy
                                                 balance_email: pref_balance_email, subscription: self)
     end
 
+    # Accounts relation
+    def accounts(reload = false)
+      @accounts = nil  if reload
+      @accounts ||= client.accounts.data.map { |account_info| Coinigy::Account.new(account_info.merge({ subscription: self })) }
+    end
+
+    # Registers a new account in the subscription and returns it
+    def add_account(name, exchange, key, secret)
+      new_attributes = { 'api_key' => key, 'api_secret' => secret, 'api_exch_id' => exchange, 'api_nickname' => name }
+      response = client.add_api_key(new_attributes)
+      return nil if response.error?
+      accounts(true).find { |account| account.auth_id.to_i == response.data.to_i }
+    rescue Exception => e
+      nil
+    end
+
     # Saves the actual data to the server
     def save
       new_data = { "first_name" => first_name, "last_name" => last_name,
