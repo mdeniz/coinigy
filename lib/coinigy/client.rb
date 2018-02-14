@@ -6,6 +6,8 @@ require 'coinigy/client/account_functions'
 require 'coinigy/client/market_data'
 
 module Coinigy
+  DEBUG = false
+
   # Client to connect to the specified coinigy api
   class Client
 
@@ -37,6 +39,10 @@ module Coinigy
         response = RestClient.post(url(path), @headers)
       end
       @last_request_timestamp = Time.now
+      if DEBUG
+        puts "Request to: #{url(path)}"
+        pp payload if payload
+      end
       Coinigy::Response.new(response)
     end
 
