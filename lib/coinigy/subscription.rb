@@ -1,8 +1,6 @@
 module Coinigy
   # Represents the Subscription to Coinigy, it holds all the info related
-  class Subscription
-    include ActiveModel::Model
-
+  class Subscription < Coinigy::Model
     attr_accessor :email, :active, :last_active, :last_login, :chat_enabled, :chat_nick,
                   :ticker_enabled, :ticker_indicator_time_type, :custom_ticker, :first_name,
                   :last_name, :pref_subscription_expires, :pref_alert_email, :pref_alert_sms,
@@ -11,8 +9,8 @@ module Coinigy
                   :street1, :street2, :city, :state, :zip, :country, :newsletter, :two_factor,
                   :subscription_status, :referral_balance, :pref_app_device_id
 
-    # Other objects
-    attr_accessor :preferences, :client
+    # Relationships  and other objects
+    attr_accessor :client, :preferences, :accounts
 
     # Connects to the API with the credentials given and returns an instance of Subscription with the data of the user
     def self.find(key, secret)
@@ -37,6 +35,7 @@ module Coinigy
                    "city" => city, "state" => state,
                    "zip" => zip, "country" => country }
       response = client.update_user(new_data)
+      add_error(response.error) if response.error?
       !response.error?
     rescue Exception => e
       false
