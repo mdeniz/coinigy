@@ -6,6 +6,7 @@ require 'active_model'
 
 ['response',
  'client',
+ 'model',
  'subscription',
  'preferences',
  'account'].each { |file| require File.expand_path("../coinigy/#{file}", __FILE__) }
