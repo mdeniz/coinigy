@@ -28,5 +28,18 @@ module Coinigy
                                                 trade_email: pref_trade_email, trade_sms: pref_trade_sms,
                                                 balance_email: pref_balance_email, subscription: self)
     end
+
+    # Saves the actual data to the server
+    def save
+      new_data = { "first_name" => first_name, "last_name" => last_name,
+                   "company" => company, "phone" => phone,
+                   "street1" => street1, "street2" => street2,
+                   "city" => city, "state" => state,
+                   "zip" => zip, "country" => country }
+      response = client.update_user(new_data)
+      !response.error?
+    rescue Exception => e
+      false
+    end
   end
 end
