@@ -1,8 +1,6 @@
 module Coinigy
   # Represents the Preferences of a user subscription to Coinigy
-  class Preferences
-    include ActiveModel::Model
-
+  class Preferences < Coinigy::Model
     attr_accessor :alert_email, :alert_sms,
                   :trade_email, :trade_sms,
                   :balance_email
@@ -16,6 +14,7 @@ module Coinigy
                           "trade_email" => trade_email, "trade_sms" => trade_sms,
                           "balance_email" => balance_email }
       response = subscription.client.save_notifications_preferences(new_preferences)
+      add_error(response.error) if response.error?
       !response.error?
     rescue Exception => e
       false
