@@ -35,6 +35,7 @@ The coinigy gem depends on these other gems for usage at runtime:
 
   * [yajl-ruby](https://github.com/brianmario/yajl-ruby)
   * [rest-client](https://github.com/rest-client/rest-client)
+  * [activemodel](https://github.com/rails/rails/tree/master/activemodel)
 
 ## Reference
 
