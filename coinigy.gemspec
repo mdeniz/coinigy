@@ -18,10 +18,9 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'rest-client', '~> 2.0'
   spec.add_runtime_dependency 'yajl-ruby', '~> 1.3'
+  spec.add_runtime_dependency 'activemodel', '~> 5.1'
 
   spec.files = %w(LICENSE README.md)
   spec.files << "#{lib}.gemspec"
   spec.files += Dir.glob("lib/**/*.rb")
-  #spec.files += Dir.glob("test/**/*.rb")
-  #spec.files += Dir.glob("script/*")
 end
