@@ -16,8 +16,13 @@ module Coinigy
         "zip" => zip, "country" => country }
     end
 
+    # Activates or deactivates the trading flag for the account
+    def trading(flag = true)
+      send_to_server { subscription.client.activate_trading_key(auth_id, flag ? 1 : 0) }
+    end
+
     # Activates or deactivates the account
-    def activate(flag)
+    def activate(flag = true)
       send_to_server { subscription.client.activate_api_key(auth_id, flag ? 1 : 0) }
     end
 

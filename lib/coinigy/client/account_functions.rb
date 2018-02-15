@@ -55,7 +55,7 @@ module Coinigy
 
       # Activate/Enable Trading on specified API key
       def activate_trading_key(id = nil, auth_active = 1)
-        request('activateTradingKey', { auth_id: id, auth_active: auth_active })
+        request('activateTradingKey', { auth_id: id, auth_trade: auth_active })
       end
 
       # Create a new exchange order. Returns internal_order_id upon success
