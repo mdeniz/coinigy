@@ -12,6 +12,14 @@ module Coinigy
     # Relationships  and other objects
     attr_accessor :client, :preferences, :accounts
 
+    def attributes
+      { "first_name" => first_name, "last_name" => last_name,
+        "company" => company, "phone" => phone,
+        "street1" => street1, "street2" => street2,
+        "city" => city, "state" => state,
+        "zip" => zip, "country" => country }
+    end
+
     # Connects to the API with the credentials given and returns an instance of Subscription with the data of the user
     def self.find(key, secret)
       client = Coinigy::Client.new(key: key, secret: secret)
@@ -43,18 +51,11 @@ module Coinigy
       nil
     end
 
+    private
+
     # Saves the actual data to the server
-    def save
-      new_data = { "first_name" => first_name, "last_name" => last_name,
-                   "company" => company, "phone" => phone,
-                   "street1" => street1, "street2" => street2,
-                   "city" => city, "state" => state,
-                   "zip" => zip, "country" => country }
-      response = client.update_user(new_data)
-      add_error(response.error) if response.error?
-      !response.error?
-    rescue Exception => e
-      false
+    def save_to_api(data)
+      client.update_user(data)
     end
   end
 end
