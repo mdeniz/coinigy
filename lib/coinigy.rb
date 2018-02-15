@@ -10,4 +10,5 @@ require 'active_model'
  'subscription',
  'preferences',
  'account',
- 'exchange'].each { |file| require File.expand_path("../coinigy/#{file}", __FILE__) }
+ 'exchange',
+ 'market'].each { |file| require File.expand_path("../coinigy/#{file}", __FILE__) }
