@@ -51,6 +51,18 @@ module Coinigy
       nil
     end
 
+    # Return all exchanges supported at Coinigy
+    def all_exchanges
+      @all_exchanges ||= client.exchanges.data.map { |exchange_info| Coinigy::Exchange.new(exchange_info.merge({ subscription: self })) }
+    end
+
+    # Exchanges relation
+    def exchanges(reload = false)
+      @exchanges = nil  if reload
+      exchanges_ids_in_accounts = accounts.map(&:exch_id).uniq
+      @exchanges ||= all_exchanges.select {|exchange| exchanges_ids_in_accounts.include?(exchange.exch_id) }
+    end
+
     private
 
     # Saves the actual attributes to the server

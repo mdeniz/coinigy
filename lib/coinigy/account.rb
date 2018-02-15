@@ -6,7 +6,7 @@ module Coinigy
                   :exch_trade_enabled, :exch_id
 
     # Relations
-    attr_accessor :subscription
+    attr_accessor :subscription, :exchange
 
     def attributes
       { "auth_id" => auth_id, "auth_key" => auth_key,
@@ -15,6 +15,11 @@ module Coinigy
         "auth_active" => auth_active, "auth_updated" => auth_updated,
         "auth_trade" => auth_trade, "exch_trade_enabled" => exch_trade_enabled,
         "exch_id" => exch_id }
+    end
+
+    # Exchange relation
+    def exchange
+      @exchange ||= subscription.all_exchanges.find { |exchange| exchange.exch_id == exch_id}
     end
 
     # Activates or deactivates the trading flag for the account
