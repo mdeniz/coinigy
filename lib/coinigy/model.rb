@@ -19,11 +19,7 @@ module Coinigy
     end
 
     def save
-      response = save_to_api(attributes)
-      add_error(response.error) if response.error?
-      !response.error?
-    rescue Exception => e
-      false
+      send_to_server { save_to_api(attributes) }
     end
 
     private
@@ -34,6 +30,14 @@ module Coinigy
 
     def add_error(new_error)
       @errors << new_error
+    end
+
+    def send_to_server
+      response = yield
+      add_error(response.error) if response.error?
+      !response.error?
+    rescue Exception => e
+      false
     end
   end
 end
