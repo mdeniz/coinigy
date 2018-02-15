@@ -53,7 +53,7 @@ module Coinigy
 
     private
 
-    # Saves the actual data to the server
+    # Saves the actual attributes to the server
     def save_to_api(data)
       client.update_user(data)
     end

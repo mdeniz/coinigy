@@ -8,13 +8,22 @@ module Coinigy
     # Relations
     attr_accessor :subscription
 
+    def attributes
+      { "first_name" => first_name, "last_name" => last_name,
+        "company" => company, "phone" => phone,
+        "street1" => street1, "street2" => street2,
+        "city" => city, "state" => state,
+        "zip" => zip, "country" => country }
+    end
+
+    # Activates or deactivates the account
+    def activate(flag)
+      send_to_server { subscription.client.activate_api_key(auth_id, flag ? 1 : 0) }
+    end
+
     # Deletes this account
     def delete
-      response = subscription.client.delete_api_key(auth_id)
-      add_error(response.error) if response.error?
-      !response.error?
-    rescue Exception => e
-      false
+      send_to_server { subscription.client.delete_api_key(auth_id) }
     end
   end
 end
