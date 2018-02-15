@@ -5,7 +5,7 @@ module Coinigy
                   :exch_balance_enabled, :exch_url
 
     # Relations
-    attr_accessor :subscription, :accounts
+    attr_accessor :subscription, :accounts, :markets
 
     def attributes
       { 'exch_id' => exch_id,
@@ -20,6 +20,11 @@ module Coinigy
     # Accounts relation
     def accounts
       @accounts ||= subscription.accounts.select { |account| account.exch_id == exch_id}
+    end
+
+    # Markets relation
+    def markets
+      @markets ||= subscription.client.markets(exch_code).data.map { |data| Coinigy::Market.new(data.merge({ exchange: self })) }
     end
   end
 end
