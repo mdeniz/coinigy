@@ -9,11 +9,12 @@ module Coinigy
     attr_accessor :subscription
 
     def attributes
-      { "first_name" => first_name, "last_name" => last_name,
-        "company" => company, "phone" => phone,
-        "street1" => street1, "street2" => street2,
-        "city" => city, "state" => state,
-        "zip" => zip, "country" => country }
+      { "auth_id" => auth_id, "auth_key" => auth_key,
+        "auth_optional1" => auth_optional1, "auth_nickname" => auth_nickname,
+        "exch_name" => exch_name, "auth_secret" => auth_secret,
+        "auth_active" => auth_active, "auth_updated" => auth_updated,
+        "auth_trade" => auth_trade, "exch_trade_enabled" => exch_trade_enabled,
+        "exch_id" => exch_id }
     end
 
     # Activates or deactivates the trading flag for the account
