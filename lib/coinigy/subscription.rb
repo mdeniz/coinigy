@@ -63,6 +63,11 @@ module Coinigy
       @exchanges ||= all_exchanges.select {|exchange| exchanges_ids_in_accounts.include?(exchange.exch_id) }
     end
 
+    # Returns the balances for the provided account ids
+    def balances(ids = [], show_nils = 0)
+      client.balances(ids.join(','), show_nils).data
+    end
+
     private
 
     # Saves the actual attributes to the server

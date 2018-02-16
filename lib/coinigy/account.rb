@@ -36,5 +36,10 @@ module Coinigy
     def delete
       send_to_server { subscription.client.delete_api_key(auth_id) }
     end
+
+    # Returns the balance of this account
+    def balance
+      subscription.balances([auth_id])
+    end
   end
 end

@@ -25,8 +25,8 @@ module Coinigy
       end
 
       # Returns a combined list of balances for all accounts, or specificied auth_ids
-      def balances
-        request('balances')
+      def balances(ids = '', show_nils = 0)
+        request('balances', { auth_ids: ids, show_nils: show_nils })
       end
 
       # Returns balances for your entire account on given date (eg '2018-02-23')
