@@ -68,6 +68,16 @@ module Coinigy
       client.balances(ids.join(','), show_nils).data
     end
 
+    # Returns the mixed balance of the whole subscription
+    def balance(show_nils = 0)
+      balances([], show_nils)
+    end
+
+    # Returns the balance history for the provided date (separated per account)
+    def balance_history(date = Date.today.to_s)
+      client.balance_history(date)
+    end
+
     private
 
     # Saves the actual attributes to the server
