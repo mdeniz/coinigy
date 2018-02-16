@@ -38,7 +38,8 @@ module Coinigy
     end
 
     # Returns the balance of this account
-    def balance
+    def balance(refresh = false)
+      return subscription.client.refresh_balance(auth_id).data if refresh
       subscription.balances([auth_id])
     end
   end
