@@ -1,5 +1,5 @@
 module Coinigy
-  # Represents an Account of a user subscription to Coinigy
+  # Represents an Exchange
   class Exchange < Coinigy::Model
     attr_accessor :exch_id, :exch_name, :exch_code, :exch_fee, :exch_trade_enabled,
                   :exch_balance_enabled, :exch_url

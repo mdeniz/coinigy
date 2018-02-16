@@ -1,4 +1,5 @@
 module Coinigy
+  # Represents the response from the API
   class Response
     def initialize(body)
       @json = Yajl::Parser.parse(body)

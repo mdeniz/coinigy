@@ -1,5 +1,5 @@
 module Coinigy
-  # Represents an Account of a user subscription to Coinigy
+  # Represents a Market of a exchange
   class Market < Coinigy::Model
     attr_accessor :exch_id, :exch_name, :exch_code, :mkt_id, :mkt_name, :exchmkt_id
 
@@ -27,7 +27,7 @@ module Coinigy
       get_data(:bids).data['bids']
     end
 
-    def orders
+    def asks_and_bids
       orders_data = get_data(:orders)
       {
         asks: orders_data['asks'],
