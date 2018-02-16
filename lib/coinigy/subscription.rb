@@ -78,6 +78,11 @@ module Coinigy
       client.balance_history(date)
     end
 
+    # Returns the list of order and price types
+    def order_and_price_types
+      @order_and_price_types ||= client.order_types.data
+    end
+
     private
 
     # Saves the actual attributes to the server
