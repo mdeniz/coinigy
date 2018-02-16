@@ -39,13 +39,15 @@ module Coinigy
       exchange = subscription.exchanges.find { |exchange| exchange.exch_code == exch_code }
       market = exchange.markets.find { |market| market.mkt_name == mkt_name }
       order_type_id = (order_type == 'Buy') ? 1 : 2
-      subscription.client.add_order('auth_id' => auth_id,
-                                    'exch_id' => exchange.exch_id,
-                                    'mkt_id' => market.mkt_id,
-                                    'order_type_id' => order_type_id,
-                                    'price_type_id' => price_type_id,
-                                    'limit_price' => limit_price,
-                                    'order_quantity' => quantity)
+      send_to_server do
+        subscription.client.add_order('auth_id' => auth_id,
+                                      'exch_id' => exchange.exch_id,
+                                      'mkt_id' => market.mkt_id,
+                                      'order_type_id' => order_type_id,
+                                      'price_type_id' => price_type_id,
+                                      'limit_price' => limit_price,
+                                      'order_quantity' => quantity)
+      end
     end
 
     def replace(changes = {})
