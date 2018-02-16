@@ -22,6 +22,10 @@ module Coinigy
       send_to_server { save_to_api(attributes) }
     end
 
+    def inspect
+      "<#{self.class} #{attributes.inspect}>"
+    end
+
     private
 
     def save_to_api(_data)
