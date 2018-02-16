@@ -42,5 +42,26 @@ module Coinigy
       return subscription.client.refresh_balance(auth_id).data if refresh
       subscription.balances([auth_id])
     end
+
+    def buy(market_pair, limit_price, quantity)
+      place_order(Coinigy::Order::BUY, market_pair, limit_price, quantity)
+    end
+
+    def sell(market_pair, limit_price, quantity)
+      place_order(Coinigy::Order::SELL, market_pair, limit_price, quantity)
+    end
+
+    private
+
+    def place_order(type, market_pair, limit_price, quantity)
+      Coinigy::Order.new('auth_id' => auth_id,
+                         'exch_code' => exchange.exch_code,
+                         'mkt_name' => market_pair,
+                         'order_type' => type == Coinigy::Order::BUY ? 'Buy' : 'Sell',
+                         'price_type_id' => Coinigy::Order::LIMIT,
+                         'limit_price' => limit_price,
+                         'quantity' => quantity,
+                         'subscription' => subscription).place
+    end
   end
 end

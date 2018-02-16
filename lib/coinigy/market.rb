@@ -57,6 +57,7 @@ module Coinigy
         bid: values['bid']
       }
     end
+
     private
 
     def get_data(type = :all)
