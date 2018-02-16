@@ -1,6 +1,16 @@
 module Coinigy
   # Represents an Account of a user subscription to Coinigy
   class Order < Coinigy::Model
+    # Order types
+    BUY = 1.freeze
+    SELL = 2.freeze
+
+    # Price types
+    LIMIT = 3.freeze
+    STOP_LIMIT = 6.freeze
+    LIMIT_MARGIN = 8.freeze
+    STOP_LIMIT_MARGIN = 9.freeze
+
     attr_accessor :exch_id, :exch_code, :exch_name,
                   :mkt_name, :limit_price, :operator, :order_id, :order_type, :order_price_type,
                   :order_status, :quantity, :order_time, :foreign_order_id, :auth_nickname, :auth_id,
@@ -38,16 +48,14 @@ module Coinigy
     def place
       exchange = subscription.exchanges.find { |exchange| exchange.exch_code == exch_code }
       market = exchange.markets.find { |market| market.mkt_name == mkt_name }
-      order_type_id = (order_type == 'Buy') ? 1 : 2
-      send_to_server do
-        subscription.client.add_order('auth_id' => auth_id,
-                                      'exch_id' => exchange.exch_id,
-                                      'mkt_id' => market.mkt_id,
-                                      'order_type_id' => order_type_id,
-                                      'price_type_id' => price_type_id,
-                                      'limit_price' => limit_price,
-                                      'order_quantity' => quantity)
-      end
+      order_type_id = (order_type == 'Buy') ? BUY : SELL
+      subscription.client.add_order('auth_id' => auth_id,
+                                    'exch_id' => exchange.exch_id,
+                                    'mkt_id' => market.mkt_id,
+                                    'order_type_id' => order_type_id,
+                                    'price_type_id' => price_type_id,
+                                    'limit_price' => limit_price,
+                                    'order_quantity' => quantity)
     end
 
     def replace(changes = {})
