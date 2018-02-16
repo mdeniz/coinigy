@@ -10,7 +10,7 @@ module Coinigy
                   :subscription_status, :referral_balance, :pref_app_device_id
 
     # Relationships  and other objects
-    attr_accessor :client, :preferences, :accounts
+    attr_accessor :client, :preferences, :accounts, :open_orders, :order_history
 
     def attributes
       { "first_name" => first_name, "last_name" => last_name,
@@ -83,7 +83,28 @@ module Coinigy
       @order_and_price_types ||= client.order_types.data
     end
 
+    # Open orders relation
+    def open_orders(reload = false)
+      load_orders(reload || @open_orders.nil?)
+      @open_orders
+    end
+
+    # Order history relation
+    def order_history(reload = false)
+      load_orders(reload || @order_history.nil?)
+      @order_history
+    end
+
     private
+
+    # Orders relation loading
+    def load_orders(reload = false)
+      if reload
+        data = client.orders.data
+        @open_orders = data['open_orders'].map { |info| Coinigy::Order.new(info.merge({ subscription: self })) }
+        @order_history = data['order_history'].map { |info| Coinigy::Order.new(info.merge({ subscription: self })) }
+      end
+    end
 
     # Saves the actual attributes to the server
     def save_to_api(data)
