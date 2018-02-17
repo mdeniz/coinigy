@@ -59,7 +59,6 @@ module Coinigy
     end
 
     def replace(changes = {})
-      return nil if changes.nil? || changes.empty?
       cancel
       assign_attributes(changes.slice(:limit_price, :quantity))
       place
