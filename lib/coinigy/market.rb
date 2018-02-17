@@ -19,15 +19,15 @@ module Coinigy
     end
 
     def history
-      get_data(:history).data['history']
+      get_data(:history)['history']
     end
 
     def asks
-      get_data(:asks).data['asks']
+      get_data(:asks)['asks']
     end
 
     def bids
-      get_data(:bids).data['bids']
+      get_data(:bids)['bids']
     end
 
     def asks_and_bids
@@ -78,7 +78,7 @@ module Coinigy
     def get_data(type = :all)
       exchange.subscription.client.data('exchange_code' => exch_code,
                                         'exchange_market' => mkt_name,
-                                        'type' => type.to_s)
+                                        'type' => type.to_s).data
     end
   end
 end
