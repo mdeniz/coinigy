@@ -45,9 +45,9 @@ module Coinigy
     end
 
     def replace(changes = {})
-      return nil if changes.empty?
+      return nil if changes.nil? || changes.empty?
       cancel
-      changes.each { |key, value| self.send("#{key}=", value) }
+      assign_attributes(changes.slice(:price, :note))
       place
     end
 
