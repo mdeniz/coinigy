@@ -4,7 +4,8 @@ end
 
 require 'active_model'
 
-['response',
+['misc',
+ 'response',
  'client',
  'model',
  'subscription',
