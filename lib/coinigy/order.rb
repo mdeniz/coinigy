@@ -1,5 +1,5 @@
 module Coinigy
-  # Represents an Account of a user subscription to Coinigy
+  # Represents an Order in an account
   class Order < Coinigy::Model
     # Order types
     BUY = 1.freeze

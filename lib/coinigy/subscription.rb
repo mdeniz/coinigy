@@ -95,6 +95,18 @@ module Coinigy
       @order_history
     end
 
+    # Open alerts relation
+    def open_alerts(reload = false)
+      load_alerts(reload || @open_alerts.nil?)
+      @open_alerts
+    end
+
+    # Alert history relation
+    def alert_history(reload = false)
+      load_alerts(reload || @alert_history.nil?)
+      @alert_history
+    end
+
     private
 
     # Orders relation loading
@@ -103,6 +115,15 @@ module Coinigy
         data = client.orders.data
         @open_orders = data['open_orders'].map { |info| Coinigy::Order.new(info.merge({ subscription: self })) }
         @order_history = data['order_history'].map { |info| Coinigy::Order.new(info.merge({ subscription: self })) }
+      end
+    end
+
+    # Alerts relation loading
+    def load_alerts(reload = false)
+      if reload
+        data = client.alerts.data
+        @open_alerts = data['open_alerts'].map { |info| Coinigy::Alert.new(info.merge({ subscription: self })) }
+        @alert_history = data['alert_history'].map { |info| Coinigy::Alert.new(info.merge({ subscription: self })) }
       end
     end
 
