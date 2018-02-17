@@ -10,6 +10,9 @@ module Coinigy
                   :alert_added, :display_name, :exch_code,
                   :alert_history_id, :timestamp, :alert_price
 
+    alias_attribute :id, :alert_id
+    alias_attribute :note, :alert_note
+
     # Relations
     attr_accessor :subscription, :market, :exchange
 
