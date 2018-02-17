@@ -58,6 +58,18 @@ module Coinigy
       }
     end
 
+    def alert(price, note = '')
+      Coinigy::Alert.new('exch_code' => exch_code,
+                         'mkt_name' => mkt_name,
+                         'price' => price,
+                         'alert_note' => note,
+                         'subscription' => exchange.subscription).place
+    end
+
+    def open_alerts(reload = false)
+      exchange.subscription.open_alerts(reload).select { |alert| alert.mkt_name == mkt_name }
+    end
+
     private
 
     def get_data(type = :all)

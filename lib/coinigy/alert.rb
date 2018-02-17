@@ -7,7 +7,8 @@ module Coinigy
 
     attr_accessor :exch_code, :exch_name,  :mkt_name, :price, :operator,
                   :alert_id, :operator_text, :alert_note,
-                  :alert_added, :display_name, :exch_code
+                  :alert_added, :display_name, :exch_code,
+                  :alert_history_id, :timestamp, :alert_price
 
     # Relations
     attr_accessor :subscription, :market, :exchange
@@ -22,7 +23,10 @@ module Coinigy
         'alert_note' => alert_note,
         'alert_added' => alert_added,
         'display_name' => display_name,
-        'exch_code' => exch_code }
+        'exch_code' => exch_code,
+        'alert_history_id' => alert_history_id,
+        'timestamp' => timestamp,
+        'alert_price' => alert_price }
     end
 
     def exchange
