@@ -5,6 +5,14 @@ module Coinigy
                   :auth_secret, :auth_updated, :auth_active, :auth_trade,
                   :exch_trade_enabled, :exch_id
 
+    alias_attribute :id, :auth_id
+    alias_attribute :key, :auth_key
+    alias_attribute :secret, :auth_secret
+    alias_attribute :nickname, :auth_nickname
+    alias_attribute :updated, :auth_updated
+    alias_attribute :active, :auth_active
+    alias_attribute :trade, :auth_trade
+
     # Relations
     attr_accessor :subscription, :exchange
 

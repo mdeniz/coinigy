@@ -4,6 +4,14 @@ module Coinigy
     attr_accessor :exch_id, :exch_name, :exch_code, :exch_fee, :exch_trade_enabled,
                   :exch_balance_enabled, :exch_url
 
+    alias_attribute :id, :exch_id
+    alias_attribute :name, :exch_name
+    alias_attribute :code, :exch_code
+    alias_attribute :fee, :exch_fee
+    alias_attribute :trade_enabled, :exch_trade_enabled
+    alias_attribute :balance_enabled, :exch_balance_enabled
+    alias_attribute :url, :exch_url
+
     # Relations
     attr_accessor :subscription, :accounts, :markets
 

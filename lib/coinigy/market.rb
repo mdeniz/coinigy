@@ -6,6 +6,9 @@ module Coinigy
     # Relations
     attr_accessor :exchange
 
+    alias_attribute :id, :mkt_id
+    alias_attribute :pair, :mkt_name
+
     def attributes
       { 'exch_id' => exch_id,
         'exch_name' => exch_name,

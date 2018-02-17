@@ -17,6 +17,11 @@ module Coinigy
                   :quantity_remaining, :stop_price, :price_type_id, :display_name, :executed_price,
                   :last_updated, :unixtime
 
+    alias_attribute :id, :order_id
+    alias_attribute :type, :order_type
+    alias_attribute :status, :order_status
+    alias_attribute :time, :order_time
+
     # Relations
     attr_accessor :subscription
 
